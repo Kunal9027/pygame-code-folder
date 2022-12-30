@@ -2,17 +2,11 @@ import pygame
 
 pygame.init()  # it initialize all pygame module
 
-screen = pygame.display.set_mode(
-    (400, 600)
-)  # screen = command is use for change screen size
-
+screen = pygame.display.set_mode((600, 500))  # screen = command is use for change screen size
 
 COLOR = 150, 190, 250  # Here R=150 , G=190 , B=250 RGB full form is RED GREEN BLUE
 
-
-pygame.display.set_caption(
-    " Game made by Kunal Chaudhary "
-)  # set_caption is used to change  title of the screen
+pygame.display.set_caption(" Game made by Kunal Chaudhary ")  # set_caption is used to change  title of the screen
 
 colck = pygame.time.Clock()
 FPS = 30
@@ -30,7 +24,6 @@ def kunal():
         for event in pygame.event.get():
             if event.type == pygame.QUIT:
                 running = False
-
         draw_win()
 
     pygame.quit()
@@ -38,5 +31,4 @@ def kunal():
 
 
 if __name__ == "__main__":
-
     kunal()
