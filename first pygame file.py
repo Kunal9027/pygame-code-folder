@@ -42,15 +42,15 @@ def kunal():
                 running = False
         
         press_button = pygame.key.get_pressed()
-        if press_button[pygame.K_a]:
+        if press_button[pygame.K_a]: #LEFT
             yellow.x -=5
-        if press_button[pygame.K_d]:
+        if press_button[pygame.K_d]: #RIGHT
             yellow.x +=5
-        if press_button[pygame.K_w]:
+        if press_button[pygame.K_w]: #UP
             yellow.y -=5
-        if press_button[pygame.K_s]:
+        if press_button[pygame.K_s]: #DOWN
             yellow.y +=5
-        if press_button[pygame.K_LEFT]:
+        if press_button[pygame.K_LEFT]:  
             red.x -=5   
         if press_button[pygame.K_RIGHT]:
             red.x +=5   
