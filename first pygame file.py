@@ -12,11 +12,11 @@ FPS = 30
 
 SHIP_WIDTH ,SHIP_HIGHT = 50 , 50
 
-YELLOW_player_image = pygame.image.load(os.path.join("assets", "spaceship_yellow.png")) #os.path is used to locate the path thats why we import os 
+YELLOW_player_image = pygame.image.load(os.path.join("assets/spaceship_yellow.png")) #os.path is used to locate the path thats why we import os 
 YELLow_size = pygame.transform.scale(YELLOW_player_image, (SHIP_WIDTH,SHIP_HIGHT))
 YELLOW_rotate = pygame.transform.rotate(YELLow_size , 90)
 
-RED_player_image = pygame.image.load(os.path.join("assets", "spaceship_red.png")) #load is used to used to load image 
+RED_player_image = pygame.image.load(os.path.join("assets/spaceship_red.png")) #load is used to used to load image 
 RED_size = pygame.transform.scale(RED_player_image, (SHIP_WIDTH,SHIP_HIGHT))  #scale is used to resiz image 
 RED_rotate = pygame.transform.rotate(RED_size , 270)  # transform.rotate is used to rotate image 
 
