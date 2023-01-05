@@ -56,7 +56,7 @@ def kunal():
             yellow.x +=SPEED_SHIP
         if press_button[pygame.K_w] and yellow.y -4 >0: #UP
             yellow.y -=SPEED_SHIP
-        if press_button[pygame.K_s] and yellow.y +50 <0: #DOWN
+        if press_button[pygame.K_s] and yellow.y +5<455: #DOWN
             yellow.y +=SPEED_SHIP
         #RED
         if press_button[pygame.K_LEFT]:  
