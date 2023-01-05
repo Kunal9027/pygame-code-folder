@@ -3,14 +3,21 @@ import os
 
 pygame.init()  # it initialize all pygame module
 
-screen = pygame.display.set_mode((600, 500))  # screen = command is use for change screen size
+WIDTH , HEIGHT = 600, 500
+
+screen = pygame.display.set_mode((WIDTH ,HEIGHT))  # screen = command is use for change screen size
 COLOR = 150, 190, 250  # Here R=150 , G=190 , B=250 RGB full form is RED GREEN BLUE
+BLACK = (0,0,0)
 pygame.display.set_caption(" Game made by Kunal Chaudhary ")  # set_caption is used to change title of the screen
 
 colck = pygame.time.Clock()
 FPS = 30
 
 SHIP_WIDTH ,SHIP_HIGHT = 50 , 50
+
+BORDER = pygame.Rect(295 ,0 ,10, 500 )
+
+SPEED_SHIP = 5
 
 YELLOW_player_image = pygame.image.load(os.path.join("assets/spaceship_yellow.png")) #os.path is used to locate the path thats why we import os 
 YELLow_size = pygame.transform.scale(YELLOW_player_image, (SHIP_WIDTH,SHIP_HIGHT))
@@ -22,7 +29,7 @@ RED_rotate = pygame.transform.rotate(RED_size , 270)  # transform.rotate is used
 
 def draw_win(red , yellow):
     screen.fill(COLOR)  # screen.fill is used to change bg_color
-    
+    pygame.draw.rect(screen , BLACK , BORDER)
     screen.blit(YELLOW_rotate,(yellow.x , yellow.y ))    #blit is use to put image on screen  
     screen.blit(RED_rotate ,(red.x ,red.y))
 
@@ -42,22 +49,24 @@ def kunal():
                 running = False
         
         press_button = pygame.key.get_pressed()
-        if press_button[pygame.K_a]: #LEFT
-            yellow.x -=5
-        if press_button[pygame.K_d]: #RIGHT
-            yellow.x +=5
-        if press_button[pygame.K_w]: #UP
-            yellow.y -=5
-        if press_button[pygame.K_s]: #DOWN
-            yellow.y +=5
+        #YELLOW
+        if press_button[pygame.K_a] and yellow.x - 4 > 0: #LEFT  #yellow.x -4 > 0 it means on x-axis we move less than zero key stop pressing
+            yellow.x -=SPEED_SHIP
+        if press_button[pygame.K_d] and yellow.x + 50 < 295 : #RIGHT
+            yellow.x +=SPEED_SHIP
+        if press_button[pygame.K_w] and yellow.y -4 >0: #UP
+            yellow.y -=SPEED_SHIP
+        if press_button[pygame.K_s] and yellow.y +50 <0: #DOWN
+            yellow.y +=SPEED_SHIP
+        #RED
         if press_button[pygame.K_LEFT]:  
-            red.x -=5   
+            red.x -=SPEED_SHIP 
         if press_button[pygame.K_RIGHT]:
-            red.x +=5   
+            red.x +=SPEED_SHIP   
         if press_button[pygame.K_UP]:
-            red.y -=5 
+            red.y -=SPEED_SHIP
         if press_button[pygame.K_DOWN]:
-            red.y +=5 
+            red.y +=SPEED_SHIP
 
 
         draw_win(red , yellow)
