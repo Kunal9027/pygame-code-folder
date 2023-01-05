@@ -17,7 +17,9 @@ SHIP_WIDTH ,SHIP_HIGHT = 50 , 50
 
 BORDER = pygame.Rect(295 ,0 ,10, 500 )
 
-SPEED_SHIP = 5
+SPEED_SHIP = 10
+
+SPEED_BULLET = 7
 
 YELLOW_player_image = pygame.image.load(os.path.join("assets/spaceship_yellow.png")) #os.path is used to locate the path thats why we import os 
 YELLow_size = pygame.transform.scale(YELLOW_player_image, (SHIP_WIDTH,SHIP_HIGHT))
@@ -38,7 +40,7 @@ def draw_win(red , yellow):
 
 def kunal():
 
-    red = pygame.Rect(400,150 ,SHIP_WIDTH ,SHIP_HIGHT)
+    red = pygame.Rect(400,150 ,SHIP_WIDTH ,SHIP_HIGHT) # RECT is use to make a rectangle 
     yellow = pygame.Rect(50,300 ,SHIP_WIDTH ,SHIP_HIGHT)
 
     running = True
@@ -59,13 +61,13 @@ def kunal():
         if press_button[pygame.K_s] and yellow.y +5<455: #DOWN
             yellow.y +=SPEED_SHIP
         #RED
-        if press_button[pygame.K_LEFT]:  
+        if press_button[pygame.K_LEFT] and red.x - 4 > 305 :  
             red.x -=SPEED_SHIP 
-        if press_button[pygame.K_RIGHT]:
+        if press_button[pygame.K_RIGHT] and red.x + 50 < 600:
             red.x +=SPEED_SHIP   
-        if press_button[pygame.K_UP]:
+        if press_button[pygame.K_UP] and red.y -4 >0 :
             red.y -=SPEED_SHIP
-        if press_button[pygame.K_DOWN]:
+        if press_button[pygame.K_DOWN] and red.y +5<455 :
             red.y +=SPEED_SHIP
 
 
