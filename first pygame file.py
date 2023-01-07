@@ -9,6 +9,8 @@ pygame.display.set_caption(" Game made by Kunal Chaudhary ")  # set_caption is u
 
 COLOR = 150, 190, 250  # Here R=150 , G=190 , B=250 RGB full form is RED GREEN BLUE
 BLACK = (0,0,0)
+RED = (255,0,0)
+YELLOW = (255,255,0)
 
 SHIP_WIDTH ,SHIP_HIGHT = 50 , 50
 BORDER = pygame.Rect(295 ,0 ,10, 500 )
@@ -17,11 +19,13 @@ colck = pygame.time.Clock()
 FPS = 30
 
 SPEED_SHIP = 10
-SPEED_BULLET = 7
-MAX_bullets = 3
+SPEED_BULLET = 15
+MAX_bullets = 4
 
 YELLOW_HIT = pygame.USEREVENT + 1
 RED_HIT  =pygame.USEREVENT + 2
+
+BACKGROUND_IMAGE = pygame.transform.scale(pygame.image.load(os.path.join("assets/space.png")) , (WIDTH , HEIGHT))
 
 
 YELLOW_player_image = pygame.image.load(os.path.join("assets/spaceship_yellow.png")) #os.path is used to locate the path thats why we import os 
@@ -32,15 +36,18 @@ RED_player_image = pygame.image.load(os.path.join("assets/spaceship_red.png")) #
 RED_size = pygame.transform.scale(RED_player_image, (SHIP_WIDTH,SHIP_HIGHT))  #scale is used to resiz image 
 RED_rotate = pygame.transform.rotate(RED_size , 270)  # transform.rotate is used to rotate image 
 
-def draw_win(red , yellow):
-    screen.fill(COLOR)  # screen.fill is used to change bg_color
+def draw_win(red , yellow , red_bullet , yellow_bulllet):
+    #screen.fill(COLOR)  # screen.fill is used to change bg_color
+    screen.blit(BACKGROUND_IMAGE,(0,0))
     pygame.draw.rect(screen , BLACK , BORDER)
     screen.blit(YELLOW_rotate,(yellow.x , yellow.y ))    #blit is use to put image on screen  
     screen.blit(RED_rotate ,(red.x ,red.y))
 
-    
+    for bullet in red_bullet: # Draw red bullets
+        pygame.draw.rect(screen , RED, bullet)
 
-
+    for bullet in yellow_bulllet:
+        pygame.draw.rect(screen , YELLOW, bullet)
 
 
     pygame.display.flip()  # pygame.display.flip is used for update
@@ -53,12 +60,16 @@ def MANAGE_BULLETS(YELLOW_bullet,RED_bullet,yellow,red):
         if red.colliderect(bullet):
             pygame.event.post(pygame.event.Event(RED_HIT))
             YELLOW_bullet.remove(bullet)
+        elif bullet.x > 600 :
+            YELLOW_bullet.remove(bullet)
 
     #red  bullet hit
     for bullet in RED_bullet :
         bullet.x -= SPEED_BULLET
         if yellow.colliderect(bullet):
             pygame.event.post(pygame.event.Event(YELLOW_HIT))
+            RED_bullet.remove(bullet)
+        elif bullet.x < 0:
             RED_bullet.remove(bullet)
 
 def kunal():
@@ -69,7 +80,8 @@ def kunal():
     RED_bullet = []
     YELLOW_bullet = []
 
-
+    yellow_health = 10
+    red_health = 10
 
     running = True
     while running:
@@ -88,7 +100,21 @@ def kunal():
                    bullet = pygame.Rect(red.x ,red.y + SHIP_HIGHT/2 -3 , 10 ,5)
                    RED_bullet.append(bullet)
 
-        MANAGE_BULLETS(YELLOW_bullet,RED_bullet,yellow,red)
+        if event.type == RED_HIT:
+            red_health -= 1
+
+        if event.type == YELLOW_HIT:
+            yellow_health -= 1
+
+        winner_text = ""
+        if red_health <= 0:
+            winner_text  = "YELLOW won"
+
+        if yellow_health <= 0:
+            winner_text = "RED won"
+
+        if winner_text != "":
+            pass #SOMEONE WON 
 
         press_button = pygame.key.get_pressed()
         #YELLOW
@@ -110,8 +136,9 @@ def kunal():
         if press_button[pygame.K_DOWN] and red.y +5<455 :
             red.y +=SPEED_SHIP
 
+        MANAGE_BULLETS(YELLOW_bullet,RED_bullet,yellow,red)
     
-        draw_win(red , yellow)
+        draw_win(red , yellow, RED_bullet , YELLOW_bullet)
 
     pygame.quit()
     exit()
