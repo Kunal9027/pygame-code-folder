@@ -25,6 +25,8 @@ SPEED_SHIP = 10
 SPEED_BULLET = 15
 MAX_bullets = 4
 
+HIT_SOUND = pygame.mixer.Sound(os.path.join("assets/Grenade+1.mp3"))
+SHOOT_SOUND = pygame.mixer.Sound(os.path.join("assets/Gun+Silencer.mp3"))
 
 HEALTH_FONT = pygame.font.SysFont('comicsans', 30)
 WINNER_FONT  = pygame.font.SysFont('comcsans' , 75)
@@ -119,17 +121,21 @@ def kunal():
                 if event.key == pygame.K_LCTRL and len(YELLOW_bullet) < MAX_bullets :   #
                     bullet = pygame.Rect(yellow.x + SHIP_WIDTH,yellow.y + SHIP_HIGHT/2 -3 , 10 ,5)
                     YELLOW_bullet.append(bullet)
+                    SHOOT_SOUND.play()
 
 
                 if event.key == pygame.K_RCTRL and len(RED_bullet) < MAX_bullets:
                    bullet = pygame.Rect(red.x ,red.y + SHIP_HIGHT/2 -3 , 10 ,5)
                    RED_bullet.append(bullet)
+                   SHOOT_SOUND.play()
 
             if event.type == RED_HIT:
                 red_health -= 1
+                HIT_SOUND.play()
 
             if event.type == YELLOW_HIT:
                 yellow_health -= 1
+                HIT_SOUND.play()
 
         winner_text = ""
         if red_health <= 0:
