@@ -179,3 +179,17 @@ def kunal():
 
 if __name__ == "__main__":
     kunal()
+
+
+### what i learn from this project
+# 1.i learn how to creat game opening windoe/display
+# 2.i learn how to set controls/keys 
+# 3.i learn how to change background
+# 4.i learn how to set fonts
+# 5.i learn how to set sounds 
+# 6.i learn how to creat events
+# 7.i learn how to change disply dimensions
+# 8.i learn how to use clock and set FPS using colck
+# 9.i learn how to creat colors (255,255,255) / (Red,Green,Blue)
+# 10.i learn how to use file location like soundsfile , image files using os module 
+# 11.i learn how to creat projectiles like bullets
