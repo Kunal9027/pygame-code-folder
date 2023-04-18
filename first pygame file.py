@@ -113,7 +113,7 @@ def kunal():
     while running:
         colck.tick(FPS)                 # clock is use to set fps how many photos update per sec.
         for event in pygame.event.get():
-            if event.type == pygame.QUIT:  #event is to use make condition on certain event
+            if event.type == pygame.QUIT:  #if is to use make condition on certain event
                 running = False
                 pygame.quit()
 
